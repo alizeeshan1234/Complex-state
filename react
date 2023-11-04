@@ -1,0 +1,60 @@
+import React, { useState } from "react";
+import ReactDOM from "react-dom";
+
+function App() {
+  const [name, setName] = useState({
+    fName: "",
+    lName: ""
+  });
+
+  const onChangeHandler = (event) => {
+    const { id, value } = event.target;
+    setName((userName) => ({
+      ...userName,
+      [id]: value
+    }));
+  };
+
+  const onClickHandler = () => {
+    console.log(name.fName + name.lName);
+    setName("");
+    const firstName = document.getElementById("fName");
+    firstName.value = "";
+    const secondName = document.getElementById("lName");
+    secondName.value = "";
+  };
+
+  const heading = {
+    fontFamily: "didot"
+  };
+
+  return (
+    <div>
+      <h1 style={heading}>
+        {name.fName} {name.lName}
+      </h1>
+      <input
+        id="fName"
+        type="text"
+        placeholder="First Name"
+        value={name.fName}
+        onChange={onChangeHandler}
+      />
+      <input
+        id="lName"
+        type="text"
+        placeholder="Last Name"
+        value={name.lName}
+        onChange={onChangeHandler}
+      />
+      <button onClick={onClickHandler}>Submit</button>
+    </div>
+  );
+}
+
+ReactDOM.render(
+  <div>
+    <App />
+  </div>,
+  document.getElementById("root")
+);
